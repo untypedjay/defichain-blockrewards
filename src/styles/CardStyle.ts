@@ -4,12 +4,20 @@ export const cardStyles = css`
   background-color: var(--clr-secondary);
   border-radius: var(--br-card);
   padding: 2em 2.5em;
+  
+  @media (max-width: 330px) {
+    padding: 0.8em 1em;
+  }
 `;
 
 export const StyledContent = styled.p`
   font-size: 2rem;
   font-weight: bold;
   margin: 0;
+  
+  @media (max-width: 380px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const StyledLabel = styled.p`
@@ -17,7 +25,7 @@ export const StyledLabel = styled.p`
   text-transform: uppercase;
   margin: 1em 0 0 0;
   
-  @media (max-width: 370px) {
+  @media (max-width: 380px) {
     font-size: 0.7rem;
   }
   

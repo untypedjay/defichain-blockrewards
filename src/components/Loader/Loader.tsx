@@ -15,6 +15,11 @@ const StyledLoader = styled.div`
   flex-direction: column;
   align-item: center;
   justify-content: center;
+  
+  @media (max-width: 830px) {
+    margin-top: -20em;
+    height: 100vh;
+  }
 `;
 
 const StyledAnimation = styled.div`
