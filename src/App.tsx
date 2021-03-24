@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { getStats } from './api/defichain';
 import { Countdown } from './components/Countdown';
 import styled from 'styled-components';
+import { Card } from './components/Card';
 
 const StyledApp = styled.div`
-  background-color: var(--clr-primary);
   color: var(--clr-text);
   height: 100%;
   top: 0;
@@ -13,10 +13,37 @@ const StyledApp = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  max-width: 800px;
+  margin: 3em auto;
+  
+  @media (max-width: 830px) {
+    margin: 8em 0;
+    padding: 0 8%;
+  }
+  
+  @media (max-width: 600px) {
+    padding: 40px;
+  }
+  
+  @media (max-width: 440px) {
+    padding: 10px;
+  }
+`;
+
+const StyledContainer = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 2em;
+  
+  @media (max-width: 700px) {
+    flex-direction: column;
+    padding-bottom: 3em;
+  }
 `;
 
 const StyledHeading = styled.h1`
-  margin: 0;
+  margin: 0 0 1em 0;
+  font-size: 2.3rem;
 `;
 
 export default function App() {
@@ -56,17 +83,18 @@ export default function App() {
       { isLoading ? <p>Loading...</p> :
         <>
           <StyledHeading>DefiChain Block Reward Reduction Countdown</StyledHeading>
-          <p>DeFiChain block reward will decrease from 200 to 150 coins in approximately</p>
+          <p>Block reward will decrease from 200 to 150 coins in approximately</p>
 
           <Countdown date={getReductionDate()}/>
 
-          <div>
-            <p>Blocks Remaining:</p>
-            <p>{ getRemainingBlocks() }</p>
-            <p>until { REDUCTION_BLOCK }</p>
-          </div>
-
-          <p>Average Block Time: { getAverageBlockTime(currentBlock).toFixed(2) } seconds</p>
+          <StyledContainer>
+            <Card title="Blocks Remaining:" label={`until ${ REDUCTION_BLOCK }`}>
+              { `${ getRemainingBlocks() }` }
+            </Card>
+            <Card title="Average Block Time:" label="seconds">
+              { `${ getAverageBlockTime(currentBlock).toFixed(2) }` }
+            </Card>
+          </StyledContainer>
         </>
       }
     </StyledApp>

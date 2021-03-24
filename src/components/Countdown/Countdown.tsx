@@ -1,29 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { StyledLabel, StyledContent, cardStyles } from '../../styles/CardStyle';
 
 interface Props {
   date: Date;
 }
 
 const StyledCountdown = styled.div`
+  ${cardStyles};
   display: flex;
-  background-color: var(--clr-secondary);
-  width: 50%;
+  width: 100%;
   justify-content: space-between;
-  padding: 2em 2.5em;
-  border-radius: var(--br-card);
-`;
-
-const StyledNumber = styled.p`
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0;
-`;
-
-const StyledLabel = styled.p`
-  color: var(--clr-label);
-  text-transform: uppercase;
-  margin: 1em 0 0 0;
 `;
 
 export default function Countdown({ date }: Props) {
@@ -54,19 +41,19 @@ export default function Countdown({ date }: Props) {
     <>
       <StyledCountdown>
         <div>
-          <StyledNumber>{ timeLeft.days }</StyledNumber>
+          <StyledContent>{ timeLeft.days }</StyledContent>
           <StyledLabel>days</StyledLabel>
         </div>
         <div>
-          <StyledNumber>{ timeLeft.hours }</StyledNumber>
+          <StyledContent>{ timeLeft.hours }</StyledContent>
           <StyledLabel>hours</StyledLabel>
         </div>
         <div>
-          <StyledNumber>{ timeLeft.minutes }</StyledNumber>
+          <StyledContent>{ timeLeft.minutes }</StyledContent>
           <StyledLabel>minutes</StyledLabel>
         </div>
         <div>
-          <StyledNumber>{ timeLeft.seconds }</StyledNumber>
+          <StyledContent>{ timeLeft.seconds }</StyledContent>
           <StyledLabel>seconds</StyledLabel>
         </div>
       </StyledCountdown>

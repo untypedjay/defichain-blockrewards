@@ -31,5 +31,6 @@ export const GlobalStyle = createGlobalStyle`
   body,
   #root {
     height: 100%;
+    background-color: var(--clr-primary);
   }
 `;
