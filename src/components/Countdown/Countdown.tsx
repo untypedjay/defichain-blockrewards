@@ -7,6 +7,23 @@ interface Props {
 
 const StyledCountdown = styled.div`
   display: flex;
+  background-color: var(--clr-secondary);
+  width: 50%;
+  justify-content: space-between;
+  padding: 2em 2.5em;
+  border-radius: var(--br-card);
+`;
+
+const StyledNumber = styled.p`
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+`;
+
+const StyledLabel = styled.p`
+  color: var(--clr-label);
+  text-transform: uppercase;
+  margin: 1em 0 0 0;
 `;
 
 export default function Countdown({ date }: Props) {
@@ -37,20 +54,20 @@ export default function Countdown({ date }: Props) {
     <>
       <StyledCountdown>
         <div>
-          <p>{ timeLeft.days }</p>
-          <p>days</p>
+          <StyledNumber>{ timeLeft.days }</StyledNumber>
+          <StyledLabel>days</StyledLabel>
         </div>
         <div>
-          <p>{ timeLeft.hours }</p>
-          <p>hours</p>
+          <StyledNumber>{ timeLeft.hours }</StyledNumber>
+          <StyledLabel>hours</StyledLabel>
         </div>
         <div>
-          <p>{ timeLeft.minutes }</p>
-          <p>minutes</p>
+          <StyledNumber>{ timeLeft.minutes }</StyledNumber>
+          <StyledLabel>minutes</StyledLabel>
         </div>
         <div>
-          <p>{ timeLeft.seconds }</p>
-          <p>seconds</p>
+          <StyledNumber>{ timeLeft.seconds }</StyledNumber>
+          <StyledLabel>seconds</StyledLabel>
         </div>
       </StyledCountdown>
       <p>Reward-Drop ETA date: { date.toUTCString() }</p>

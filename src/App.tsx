@@ -1,7 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import { getStats } from './api/defichain';
 import { Countdown } from './components/Countdown';
+import styled from 'styled-components';
+
+const StyledApp = styled.div`
+  background-color: var(--clr-primary);
+  color: var(--clr-text);
+  height: 100%;
+  top: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledHeading = styled.h1`
+  margin: 0;
+`;
 
 export default function App() {
   const [currentBlock, setCurrentBlock] = useState<number>(0);
@@ -36,10 +52,10 @@ export default function App() {
   };
 
   return (
-    <div className="App">
+    <StyledApp>
       { isLoading ? <p>Loading...</p> :
         <>
-          <h1>DefiChain Block Reward Reduction Countdown</h1>
+          <StyledHeading>DefiChain Block Reward Reduction Countdown</StyledHeading>
           <p>DeFiChain block reward will decrease from 200 to 150 coins in approximately</p>
 
           <Countdown date={getReductionDate()}/>
@@ -53,6 +69,6 @@ export default function App() {
           <p>Average Block Time: { getAverageBlockTime(currentBlock).toFixed(2) } seconds</p>
         </>
       }
-    </div>
+    </StyledApp>
   );
 }
