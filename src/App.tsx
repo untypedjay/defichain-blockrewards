@@ -3,6 +3,7 @@ import { getStats } from './api/defichain';
 import { Countdown } from './components/Countdown';
 import styled from 'styled-components';
 import { Card } from './components/Card';
+import { Loader } from './components/Loader';
 
 const StyledApp = styled.div`
   color: var(--clr-text);
@@ -14,7 +15,7 @@ const StyledApp = styled.div`
   align-items: center;
   justify-content: center;
   max-width: 800px;
-  margin: 3em auto;
+  margin: 0 auto;
   
   @media (max-width: 830px) {
     margin: 8em 0;
@@ -80,7 +81,7 @@ export default function App() {
 
   return (
     <StyledApp>
-      { isLoading ? <p>Loading...</p> :
+      { isLoading ? <Loader/> :
         <>
           <StyledHeading>DefiChain Block Reward Reduction Countdown</StyledHeading>
           <p>Block reward will decrease from 200 to 150 coins in approximately</p>

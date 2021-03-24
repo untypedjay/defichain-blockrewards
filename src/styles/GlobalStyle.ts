@@ -13,6 +13,10 @@ export const GlobalStyle = createGlobalStyle`
     --card-box-shadow: 0 8px 16px 0 rgb(0 0 0 / 4%);
     --card-border: 1px solid rgba(0, 0, 0, .2);
     --hover-transition: 0.2s ease;
+
+    --anm-size: 50px;
+    --anm-border: 4px;
+    --anm-time: 1.3s;
   }
   
   * {
