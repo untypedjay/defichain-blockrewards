@@ -61,7 +61,7 @@ export default function App() {
   const loadData = async () => {
     const stats = await getStats();
     setCurrentBlock(stats.blockHeight);
-    setIsLoading(false);
+    //setIsLoading(false);
   };
 
   const getRemainingBlocks = () => {
