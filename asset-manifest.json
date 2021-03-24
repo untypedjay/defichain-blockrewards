@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/defichain-blockrewards/static/js/main.b193a402.chunk.js",
-    "main.js.map": "/defichain-blockrewards/static/js/main.b193a402.chunk.js.map",
+    "main.js": "/defichain-blockrewards/static/js/main.c6960fc0.chunk.js",
+    "main.js.map": "/defichain-blockrewards/static/js/main.c6960fc0.chunk.js.map",
     "runtime-main.js": "/defichain-blockrewards/static/js/runtime-main.0387d5db.js",
     "runtime-main.js.map": "/defichain-blockrewards/static/js/runtime-main.0387d5db.js.map",
     "static/js/2.ee62978f.chunk.js": "/defichain-blockrewards/static/js/2.ee62978f.chunk.js",
@@ -14,6 +14,6 @@
   "entrypoints": [
     "static/js/runtime-main.0387d5db.js",
     "static/js/2.ee62978f.chunk.js",
-    "static/js/main.b193a402.chunk.js"
+    "static/js/main.c6960fc0.chunk.js"
   ]
 }
