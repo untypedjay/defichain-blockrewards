@@ -4,7 +4,11 @@ import { getStats } from './api/defichain';
 import { Countdown } from './components/Countdown';
 import { Card } from './components/Card';
 import { Loader } from './components/Loader';
-import { FIRST_BLOCK_UTC, REDUCTION_BLOCK } from './constants/common';
+import {
+  CURRENT_BLOCK_REWARD,
+  FIRST_BLOCK_UTC, FUTURE_BLOCK_REWARD,
+  REDUCTION_BLOCK
+} from './constants/common';
 
 const StyledApp = styled.div`
   color: var(--clr-text);
@@ -88,7 +92,7 @@ export default function App() {
             DefiChain Block Reward Reduction Countdown
           </StyledHeading>
           <p>
-            Block reward will decrease from 200 to 150 coins in approximately
+            Block reward will decrease from { CURRENT_BLOCK_REWARD } to { FUTURE_BLOCK_REWARD } coins in approximately
           </p>
 
           <Countdown date={getReductionDate()}/>
