@@ -33,9 +33,10 @@ const StyledApp = styled.div`
 `;
 
 const StyledContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   width: 100%;
-  gap: 2em;
+  grid-gap: 2em;
   
   @media (max-width: 700px) {
     flex-direction: column;
