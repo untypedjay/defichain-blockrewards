@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { getStats } from './api/defichain';
 import { Countdown } from './components/Countdown';
-import styled from 'styled-components';
 import { Card } from './components/Card';
 import { Loader } from './components/Loader';
+import { FIRST_BLOCK_UTC, REDUCTION_BLOCK } from './constants/common';
 
 const StyledApp = styled.div`
   color: var(--clr-text);
@@ -52,8 +53,6 @@ const StyledHeading = styled.h1`
 export default function App() {
   const [currentBlock, setCurrentBlock] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
-  const REDUCTION_BLOCK = 1050000;
-  const FIRST_BLOCK_UTC = new Date(2020, 4, 11, 6, 47, 10);
 
   useEffect(() => {
     loadData();
@@ -85,16 +84,26 @@ export default function App() {
     <StyledApp>
       { isLoading ? <Loader/> :
         <>
-          <StyledHeading>DefiChain Block Reward Reduction Countdown</StyledHeading>
-          <p>Block reward will decrease from 200 to 150 coins in approximately</p>
+          <StyledHeading>
+            DefiChain Block Reward Reduction Countdown
+          </StyledHeading>
+          <p>
+            Block reward will decrease from 200 to 150 coins in approximately
+          </p>
 
           <Countdown date={getReductionDate()}/>
 
           <StyledContainer>
-            <Card title="Blocks Remaining:" label={`until ${ REDUCTION_BLOCK }`}>
+            <Card
+              title="Blocks Remaining:"
+              label={`until ${ REDUCTION_BLOCK }`}
+            >
               { `${ getRemainingBlocks() }` }
             </Card>
-            <Card title="Average Block Time:" label="seconds">
+            <Card
+              title="Average Block Time:"
+              label="seconds"
+            >
               { `${ getAverageBlockTime(currentBlock).toFixed(2) }` }
             </Card>
           </StyledContainer>
