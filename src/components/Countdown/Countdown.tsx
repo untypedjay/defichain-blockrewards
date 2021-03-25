@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { StyledLabel, StyledContent, cardStyles } from '../../styles/CardStyle';
+import { cardStyles } from '../../styles/CardStyle';
+import { CountdownElement } from './index';
 
 interface Props {
   date: Date;
@@ -40,22 +41,18 @@ export default function Countdown({ date }: Props) {
   return (
     <>
       <StyledCountdown>
-        <div>
-          <StyledContent>{ timeLeft.days }</StyledContent>
-          <StyledLabel>days</StyledLabel>
-        </div>
-        <div>
-          <StyledContent>{ timeLeft.hours }</StyledContent>
-          <StyledLabel>hours</StyledLabel>
-        </div>
-        <div>
-          <StyledContent>{ timeLeft.minutes }</StyledContent>
-          <StyledLabel>minutes</StyledLabel>
-        </div>
-        <div>
-          <StyledContent>{ timeLeft.seconds }</StyledContent>
-          <StyledLabel>seconds</StyledLabel>
-        </div>
+        <CountdownElement label="days">
+          { timeLeft.days }
+        </CountdownElement>
+        <CountdownElement label="hours">
+          { timeLeft.hours }
+        </CountdownElement>
+        <CountdownElement label="minutes">
+          { timeLeft.minutes }
+        </CountdownElement>
+        <CountdownElement label="seconds">
+          { timeLeft.seconds }
+        </CountdownElement>
       </StyledCountdown>
       <p>Reward-Drop ETA date: { date.toUTCString() }</p>
     </>
