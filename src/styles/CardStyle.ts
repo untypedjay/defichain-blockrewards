@@ -4,6 +4,7 @@ export const cardStyles = css`
   background-color: var(--clr-secondary);
   border-radius: var(--br-card);
   padding: 2em 2.5em;
+  box-shadow: var(--card-box-shadow);
   
   @media (max-width: 330px) {
     padding: 0.8em 1em;

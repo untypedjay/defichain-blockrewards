@@ -2,10 +2,11 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    --clr-primary: #212442;
-    --clr-secondary: #2D325A;
-    --clr-text: #FFFFFF;
-    --clr-label: #737AAE;
+    --clr-accent: #AD09D7;
+    --clr-primary: #F4F3F6;
+    --clr-secondary: #FFFFFF;
+    --clr-text: #363636;
+    --clr-label: #9C9C9C;
 
     --br-card: 20px;
     --br-button: 4px;
