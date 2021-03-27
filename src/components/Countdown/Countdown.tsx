@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { cardStyles } from '../../styles/CardStyle';
 import { CountdownElement } from './index';
@@ -15,7 +15,7 @@ const StyledCountdown = styled.div`
 `;
 
 export default function Countdown({ date }: Props) {
-  const calculateTimeLeft = () => {
+  const calculateTimeLeft = useCallback(() => {
     const difference = +date - +new Date();
     let timeLeft = {};
     if (difference > 0) {
@@ -27,15 +27,15 @@ export default function Countdown({ date }: Props) {
       };
     }
     return timeLeft;
-  };
+  }, [date]);
 
   const [timeLeft, setTimeLeft] = useState<any>(calculateTimeLeft());
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const interval = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
-    return () => clearTimeout(timer);
+    return () => clearInterval(interval);
   }, [calculateTimeLeft]);
 
   return (

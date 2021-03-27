@@ -7,7 +7,7 @@ import { Loader } from './components/Loader';
 import {
   CURRENT_BLOCK_REWARD,
   FIRST_BLOCK_UTC, FUTURE_BLOCK_REWARD,
-  REDUCTION_BLOCK
+  REDUCTION_BLOCK, REFRESH_TIME
 } from './constants/common';
 
 const StyledApp = styled.div`
@@ -58,19 +58,20 @@ export default function App() {
   const [currentBlock, setCurrentBlock] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  const loadData = async () => {
-    const stats = await getStats();
-    console.log(REDUCTION_BLOCK - stats.blockHeight);
-    setCurrentBlock(stats.blockHeight);
-    setIsLoading(false);
-  };
-
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const loadData = async () => {
+      const stats = await getStats();
+      setCurrentBlock(stats.blockHeight);
+      setIsLoading(false);
+    };
+
+    loadData();
+
+    const interval = setInterval(() => {
       loadData();
-    }, 60000);
-    return () => clearTimeout(timer);
-  }, [loadData]);
+    }, REFRESH_TIME);
+    return () => clearInterval(interval);
+  }, []);
 
   const getRemainingBlocks = () => {
     return REDUCTION_BLOCK - currentBlock;
