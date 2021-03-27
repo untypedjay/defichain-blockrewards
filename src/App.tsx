@@ -72,7 +72,7 @@ export default function App() {
       loadData();
     }, REFRESH_TIME);
     return () => clearInterval(interval);
-  }, []);
+  }, [setCurrentBlock]);
 
   const getRemainingBlocks = () => {
     return REDUCTION_BLOCK - currentBlock;
