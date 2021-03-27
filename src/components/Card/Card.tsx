@@ -16,10 +16,14 @@ const StyledCard = styled.div`
   ${cardStyles};
 `;
 
+const StyledHeading = styled.h2`
+  font-size: 1.1rem;
+`;
+
 export default function Card({ title, children, label }: Props) {
   return (
     <StyledContainer>
-      <h3>{ title }</h3>
+      <StyledHeading>{ title }</StyledHeading>
       <StyledCard>
         <StyledContent>{ children }</StyledContent>
         <StyledLabel>{ label }</StyledLabel>
