@@ -58,15 +58,19 @@ export default function App() {
   const [currentBlock, setCurrentBlock] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
   const loadData = async () => {
     const stats = await getStats();
+    console.log(REDUCTION_BLOCK - stats.blockHeight);
     setCurrentBlock(stats.blockHeight);
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      loadData();
+    }, 60000);
+    return () => clearTimeout(timer);
+  }, [loadData]);
 
   const getRemainingBlocks = () => {
     return REDUCTION_BLOCK - currentBlock;
