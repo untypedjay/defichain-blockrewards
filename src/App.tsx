@@ -73,15 +73,15 @@ export default function App() {
   };
 
   const getAverageBlockTime = (block: number) => {
-    const secondsSinceFirstBlock = (new Date().getTime() - FIRST_BLOCK_UTC.getTime()) / 1000;
+    const now = new Date().valueOf();
+    const secondsSinceFirstBlock = (now - new Date(FIRST_BLOCK_UTC).getTime()) / 1000;
     return secondsSinceFirstBlock / block;
   };
 
   const getReductionDate = () => {
     const remainingTime = getRemainingBlocks() * getAverageBlockTime(currentBlock);
     const reductionDate = new Date();
-    reductionDate.setSeconds(new Date().getSeconds() + remainingTime);
-    return reductionDate;
+    return new Date(reductionDate.getTime() + 1000 * remainingTime)
   };
 
   return (
