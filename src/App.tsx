@@ -9,6 +9,7 @@ import {
   FIRST_BLOCK_UTC, FUTURE_BLOCK_REWARD,
   REDUCTION_BLOCK, REFRESH_TIME
 } from './constants/common';
+import useLocalStorage from './hooks/useLocalStorage';
 
 const StyledApp = styled.div`
   color: var(--clr-text);
@@ -55,7 +56,7 @@ const StyledHeading = styled.h1`
 `;
 
 export default function App() {
-  const [currentBlock, setCurrentBlock] = useState<number>(0);
+  const [currentBlock, setCurrentBlock] = useLocalStorage('currentBlock', 0);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
