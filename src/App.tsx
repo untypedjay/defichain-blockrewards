@@ -34,7 +34,7 @@ const StyledApp = styled.div`
   
   @media (max-width: 440px) {
     padding: 20px;
-    margin: 10em 0;
+    margin: 8em 0;
   }
 `;
 
@@ -45,7 +45,7 @@ const StyledContainer = styled.div`
   grid-gap: 2em;
   
   @media (max-width: 700px) {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     padding-bottom: 3em;
   }
 `;
