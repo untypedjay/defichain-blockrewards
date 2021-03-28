@@ -1,20 +1,20 @@
 import React from 'react';
-import { cleanup, render } from '@testing-library/react';
-import App from './App';
 import ReactDOM from 'react-dom';
+import Loader from './Loader';
+import { cleanup, render } from '@testing-library/react';
 
 afterEach(cleanup);
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<App/>, div);
+  ReactDOM.render(<Loader/>, div);
 });
 
 it('renders correctly', () => {
-  render(<App/>);
+  render(<Loader/>);
 });
 
 it('matches snapshot', () => {
-  const { asFragment } = render(<App/>);
+  const { asFragment } = render(<Loader/>);
   expect(asFragment()).toMatchSnapshot();
 });
