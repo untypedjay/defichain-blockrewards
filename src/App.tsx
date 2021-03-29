@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { getStats } from './api/defichain';
+import useLocalStorage from './hooks/useLocalStorage';
 import { Countdown } from './components/Countdown';
 import { Card } from './components/Card';
 import { Loader } from './components/Loader';
+import { getStats } from './api/defichain';
 import {
   CURRENT_BLOCK_REWARD,
-  FIRST_BLOCK_UTC, FUTURE_BLOCK_REWARD,
-  REDUCTION_BLOCK, REFRESH_TIME
+  FUTURE_BLOCK_REWARD,
+  REDUCTION_BLOCK,
+  REFRESH_TIME
 } from './constants/common';
-import useLocalStorage from './hooks/useLocalStorage';
+import {
+  getAverageBlockTime,
+  getReductionDate,
+  getRemainingBlocks
+} from './utils/blockchain';
 
 const StyledApp = styled.div`
   color: var(--clr-text);
@@ -74,22 +80,6 @@ export default function App() {
     return () => clearInterval(interval);
   }, [setCurrentBlock]);
 
-  const getRemainingBlocks = () => {
-    return REDUCTION_BLOCK - currentBlock;
-  };
-
-  const getAverageBlockTime = (block: number) => {
-    const now = new Date().valueOf();
-    const secondsSinceFirstBlock = (now - new Date(FIRST_BLOCK_UTC).getTime()) / 1000;
-    return secondsSinceFirstBlock / block;
-  };
-
-  const getReductionDate = () => {
-    const remainingTime = getRemainingBlocks() * getAverageBlockTime(currentBlock);
-    const reductionDate = new Date();
-    return new Date(reductionDate.getTime() + 1000 * remainingTime)
-  };
-
   return (
     <StyledApp>
       { isLoading ? <Loader/> :
@@ -101,14 +91,14 @@ export default function App() {
             Block reward will decrease from { CURRENT_BLOCK_REWARD } to { FUTURE_BLOCK_REWARD } coins in approximately
           </p>
 
-          <Countdown date={getReductionDate()}/>
+          <Countdown date={getReductionDate(currentBlock)}/>
 
           <StyledContainer>
             <Card
               title="Blocks Remaining:"
               label={`until ${ REDUCTION_BLOCK }`}
             >
-              { `${ getRemainingBlocks() }` }
+              { `${ getRemainingBlocks(currentBlock) }` }
             </Card>
             <Card
               title="Average Block Time:"
