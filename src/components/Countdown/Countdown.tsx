@@ -54,7 +54,7 @@ export default function Countdown({ date }: Props) {
           { timeLeft.seconds }
         </CountdownElement>
       </StyledCountdown>
-      <p>Reward-Drop ETA date: { date.toUTCString() }</p>
+      <p>Reward-Rise ETA date: { date.toUTCString() }</p>
     </>
   );
 }

@@ -85,10 +85,10 @@ export default function App() {
       { isLoading ? <Loader/> :
         <>
           <StyledHeading>
-            DefiChain Block Reward Reduction Countdown
+            DefiChain Block Reward Countdown
           </StyledHeading>
           <p>
-            Block reward will decrease from { CURRENT_BLOCK_REWARD } to { FUTURE_BLOCK_REWARD } coins in approximately
+            Block reward will change from { CURRENT_BLOCK_REWARD } to { FUTURE_BLOCK_REWARD } coins in approximately
           </p>
 
           <Countdown date={getReductionDate(currentBlock)}/>
