@@ -1,5 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<RewardDistribution> matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-dlfnbm ioFdWY"
+  >
+    <h2
+      class="sc-eCssSg eROQwk"
+    >
+      Reward Distribution:
+    </h2>
+    <div
+      class="sc-hKgILt aqgCd"
+    >
+      <table
+        class="sc-jSgupP kbZlDX"
+      >
+        <thead>
+          <tr>
+            <th>
+              Area
+            </th>
+            <th>
+              DFI per block
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Mining Reward
+            </td>
+            <td>
+              135
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Community Fund
+            </td>
+            <td>
+              19.9
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Anchor Reward
+            </td>
+            <td>
+              0.1
+            </td>
+          </tr>
+          <tr>
+            <td>
+              DEX Liquidity Mining
+            </td>
+            <td>
+              103.1
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div
