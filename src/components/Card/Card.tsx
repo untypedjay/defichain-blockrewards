@@ -4,8 +4,8 @@ import { cardStyles, StyledContent, StyledLabel } from '../../styles/CardStyle';
 
 interface Props {
   title: string;
-  children: string;
-  label: string;
+  children: string | JSX.Element;
+  label?: string;
 }
 
 const StyledContainer = styled.div`
@@ -20,13 +20,16 @@ const StyledHeading = styled.h2`
   font-size: 1.1rem;
 `;
 
-export default function Card({ title, children, label }: Props) {
+export default function Card({ title, children, label }: Props): JSX.Element {
   return (
     <StyledContainer>
       <StyledHeading>{ title }</StyledHeading>
       <StyledCard>
-        <StyledContent>{ children }</StyledContent>
-        <StyledLabel>{ label }</StyledLabel>
+        {
+          typeof children === 'string' ? <StyledContent>{ children }</StyledContent> :
+          children
+        }
+        { label && <StyledLabel>{ label }</StyledLabel> }
       </StyledCard>
     </StyledContainer>
   );

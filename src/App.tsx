@@ -16,6 +16,7 @@ import {
   getReductionDate,
   getRemainingBlocks
 } from './utils/blockchain';
+import { RewardDistribution } from './components/RewardDistribution';
 
 const StyledApp = styled.div`
   color: var(--clr-text);
@@ -44,7 +45,7 @@ const StyledApp = styled.div`
   }
 `;
 
-const StyledContainer = styled.div`
+const StyledVerticalContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
@@ -54,6 +55,13 @@ const StyledContainer = styled.div`
     grid-template-columns: 1fr;
     padding-bottom: 3em;
   }
+`;
+
+const StyledHorizontalContainer = styled.div`
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 2em;
+  height: 100%;
 `;
 
 const StyledHeading = styled.h1`
@@ -93,20 +101,23 @@ export default function App() {
 
           <Countdown date={getReductionDate(currentBlock)}/>
 
-          <StyledContainer>
-            <Card
-              title="Blocks Remaining:"
-              label={`until ${ REDUCTION_BLOCK }`}
-            >
-              { `${ getRemainingBlocks(currentBlock) }` }
-            </Card>
-            <Card
-              title="Average Block Time:"
-              label="seconds"
-            >
-              { `${ getAverageBlockTime(currentBlock).toFixed(2) }` }
-            </Card>
-          </StyledContainer>
+          <StyledVerticalContainer>
+            <StyledHorizontalContainer>
+              <Card
+                title="Blocks Remaining:"
+                label={`until ${ REDUCTION_BLOCK }`}
+              >
+                { `${ getRemainingBlocks(currentBlock) }` }
+              </Card>
+              <Card
+                title="Average Block Time:"
+                label="seconds"
+              >
+                { `${ getAverageBlockTime(currentBlock).toFixed(2) }` }
+              </Card>
+            </StyledHorizontalContainer>
+            <RewardDistribution/>
+          </StyledVerticalContainer>
         </>
       }
     </StyledApp>
