@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import useLocalStorage from './hooks/useLocalStorage';
-import { Countdown } from './components/Countdown';
-import { Card } from './components/Card';
-import { Loader } from './components/Loader';
-import { getStats } from './api/defichain';
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import useLocalStorage from "./hooks/useLocalStorage";
+import { Countdown } from "./components/Countdown";
+import { Card } from "./components/Card";
+import { Loader } from "./components/Loader";
+import { getStats } from "./api/defichain";
 import {
   CURRENT_BLOCK_REWARD,
   FUTURE_BLOCK_REWARD,
   REDUCTION_BLOCK,
-  REFRESH_TIME
-} from './constants/common';
+} from "./constants";
 import {
   getAverageBlockTime,
   getReductionDate,
-  getRemainingBlocks
-} from './utils/blockchain';
-import { RewardDistribution } from './components/RewardDistribution';
+  getRemainingBlocks,
+} from "./utils";
+import { RewardDistribution } from "./components/RewardDistribution";
 
 const StyledApp = styled.div`
   color: var(--clr-text);
@@ -29,16 +28,16 @@ const StyledApp = styled.div`
   justify-content: center;
   max-width: 800px;
   margin: 0 auto;
-  
+
   @media (max-width: 830px) {
     margin: 8em 0;
     padding: 0 8%;
   }
-  
+
   @media (max-width: 600px) {
     padding: 40px;
   }
-  
+
   @media (max-width: 440px) {
     padding: 20px;
     margin: 8em 0;
@@ -47,10 +46,10 @@ const StyledApp = styled.div`
 
 const StyledVerticalContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
   width: 100%;
   grid-gap: 2em;
-  
+
   @media (max-width: 700px) {
     grid-template-columns: 1fr;
     padding-bottom: 3em;
@@ -70,12 +69,15 @@ const StyledHeading = styled.h1`
 `;
 
 export default function App() {
-  const [currentBlock, setCurrentBlock] = useLocalStorage('currentBlock', 0);
+  const [currentBlock, setCurrentBlock] = useLocalStorage("currentBlock", 0);
   const [isLoading, setIsLoading] = useState(true);
+
+  const AVERAGE_BLOCK_TIME = getAverageBlockTime(currentBlock);
 
   useEffect(() => {
     const loadData = async () => {
       const stats = await getStats();
+      console.log(stats.blockHeight);
       setCurrentBlock(stats.blockHeight);
       setIsLoading(false);
     };
@@ -84,42 +86,40 @@ export default function App() {
 
     const interval = setInterval(() => {
       loadData();
-    }, REFRESH_TIME);
+    }, AVERAGE_BLOCK_TIME * 1000);
     return () => clearInterval(interval);
-  }, [setCurrentBlock]);
+  }, [setCurrentBlock, AVERAGE_BLOCK_TIME]);
 
   return (
     <StyledApp>
-      { isLoading ? <Loader/> :
+      {isLoading ? (
+        <Loader />
+      ) : (
         <>
-          <StyledHeading>
-            DefiChain Block Reward Countdown
-          </StyledHeading>
+          <StyledHeading>DeFiChain Block Reward Countdown</StyledHeading>
           <p>
-            Block reward will change from { CURRENT_BLOCK_REWARD } to { FUTURE_BLOCK_REWARD } coins in approximately
+            Block reward will decrease from {CURRENT_BLOCK_REWARD} to{" "}
+            {FUTURE_BLOCK_REWARD} coins in approximately
           </p>
 
-          <Countdown date={getReductionDate(currentBlock)}/>
+          <Countdown date={getReductionDate(currentBlock)} />
 
           <StyledVerticalContainer>
             <StyledHorizontalContainer>
               <Card
                 title="Blocks Remaining:"
-                label={`until ${ REDUCTION_BLOCK }`}
+                label={`until ${REDUCTION_BLOCK}`}
               >
-                { `${ getRemainingBlocks(currentBlock) }` }
+                {`${getRemainingBlocks(currentBlock)}`}
               </Card>
-              <Card
-                title="Average Block Time:"
-                label="seconds"
-              >
-                { `${ getAverageBlockTime(currentBlock).toFixed(2) }` }
+              <Card title="Average Block Time:" label="seconds">
+                {`${Math.round(AVERAGE_BLOCK_TIME * 100) / 100}`}
               </Card>
             </StyledHorizontalContainer>
-            <RewardDistribution/>
+            <RewardDistribution />
           </StyledVerticalContainer>
         </>
-      }
+      )}
     </StyledApp>
   );
 }

@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { cardStyles } from '../../styles/CardStyle';
-import { CountdownElement } from './index';
+import { useCallback, useEffect, useState } from "react";
+import styled from "styled-components";
+import { cardStyles } from "../../styles/CardStyle";
+import { CountdownElement } from "./index";
 
 interface Props {
   date: Date;
@@ -23,7 +23,7 @@ export default function Countdown({ date }: Props) {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60)
+        seconds: Math.floor((difference / 1000) % 60),
       };
     }
     return timeLeft;
@@ -41,20 +41,12 @@ export default function Countdown({ date }: Props) {
   return (
     <>
       <StyledCountdown>
-        <CountdownElement label="days">
-          { timeLeft.days }
-        </CountdownElement>
-        <CountdownElement label="hours">
-          { timeLeft.hours }
-        </CountdownElement>
-        <CountdownElement label="minutes">
-          { timeLeft.minutes }
-        </CountdownElement>
-        <CountdownElement label="seconds">
-          { timeLeft.seconds }
-        </CountdownElement>
+        <CountdownElement label="days">{timeLeft.days}</CountdownElement>
+        <CountdownElement label="hours">{timeLeft.hours}</CountdownElement>
+        <CountdownElement label="minutes">{timeLeft.minutes}</CountdownElement>
+        <CountdownElement label="seconds">{timeLeft.seconds}</CountdownElement>
       </StyledCountdown>
-      <p>Reward-Rise ETA date: { date.toUTCString() }</p>
+      <p>Reward-Drop ETA date: {date.toUTCString()}</p>
     </>
   );
 }
