@@ -6,14 +6,11 @@ import { Card } from "./components/Card";
 import { Loader } from "./components/Loader";
 import { getStats } from "./api/defichain";
 import {
-  CURRENT_BLOCK_REWARD,
-  FUTURE_BLOCK_REWARD,
-  REDUCTION_BLOCK,
-} from "./constants";
-import {
   getAverageBlockTime,
   getReductionDate,
   getRemainingBlocks,
+  getCurrentCycle,
+  getReductionBlock,
 } from "./utils";
 import { RewardDistribution } from "./components/RewardDistribution";
 
@@ -77,7 +74,7 @@ export default function App() {
   useEffect(() => {
     const loadData = async () => {
       const stats = await getStats();
-      console.log(stats.blockHeight);
+      console.log(getCurrentCycle(stats.blockHeight));
       setCurrentBlock(stats.blockHeight);
       setIsLoading(false);
     };
@@ -98,8 +95,7 @@ export default function App() {
         <>
           <StyledHeading>DeFiChain Block Reward Countdown</StyledHeading>
           <p>
-            Block reward will decrease from {CURRENT_BLOCK_REWARD} to{" "}
-            {FUTURE_BLOCK_REWARD} coins in approximately
+            Block reward will decrease from {0} to {0} coins in approximately
           </p>
 
           <Countdown date={getReductionDate(currentBlock)} />
@@ -108,7 +104,7 @@ export default function App() {
             <StyledHorizontalContainer>
               <Card
                 title="Blocks Remaining:"
-                label={`until ${REDUCTION_BLOCK}`}
+                label={`until ${getReductionBlock(currentBlock)}`}
               >
                 {`${getRemainingBlocks(currentBlock)}`}
               </Card>
