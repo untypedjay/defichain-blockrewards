@@ -44,6 +44,6 @@ export const getCurrentCycle = (currentBlock: number) => {
 };
 
 export const getCurrentTotalRewards = (currentBlock: number) => {
-  const lastCycle = getCurrentCycle(currentBlock) - 1;
-  return TOTAL_REWARD_INITIAL_CYCLE * REWARD_DECREASE_RATE ** lastCycle;
+  const cycle = getCurrentCycle(currentBlock);
+  return TOTAL_REWARD_INITIAL_CYCLE * REWARD_DECREASE_RATE ** cycle;
 };

@@ -14,7 +14,7 @@ import {
   round,
 } from "./utils";
 import { RewardDistribution } from "./components/RewardDistribution";
-import { CYCLE_BLOCK_LENGTH } from "./constants";
+import { CYCLE_BLOCK_LENGTH, DFI_DECIMAL_PLACES } from "./constants";
 
 const StyledApp = styled.div`
   color: var(--clr-text);
@@ -97,8 +97,12 @@ export default function App() {
         <>
           <StyledHeading>DeFiChain Block Reward Countdown</StyledHeading>
           <p>
-            Block reward will decrease from {round(TOTAL_REWARDS)} to{" "}
-            {round(getCurrentTotalRewards(currentBlock + CYCLE_BLOCK_LENGTH))}{" "}
+            Block reward will decrease from{" "}
+            {round(TOTAL_REWARDS, DFI_DECIMAL_PLACES)} to{" "}
+            {round(
+              getCurrentTotalRewards(currentBlock + CYCLE_BLOCK_LENGTH),
+              DFI_DECIMAL_PLACES
+            )}{" "}
             DFI in approximately
           </p>
 
@@ -113,7 +117,7 @@ export default function App() {
                 {`${getRemainingBlocks(currentBlock)}`}
               </Card>
               <Card title="Average Block Time:" label="seconds">
-                {`${round(AVERAGE_BLOCK_TIME)}`}
+                {`${round(AVERAGE_BLOCK_TIME, 4)}`}
               </Card>
             </StyledHorizontalContainer>
             <RewardDistribution totalRewards={TOTAL_REWARDS} />
