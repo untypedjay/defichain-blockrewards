@@ -2,6 +2,8 @@ import {
   CYCLE_BLOCK_LENGTH,
   INITIAL_CYCLE_BLOCK,
   INITIAL_CYCLE_BLOCK_UTC,
+  REWARD_DECREASE_RATE,
+  TOTAL_REWARD_INITIAL_CYCLE,
 } from "../constants";
 
 export const getReductionBlock = (currentBlock: number) => {
@@ -39,4 +41,9 @@ export const getCurrentCycle = (currentBlock: number) => {
   }
 
   return cycleNumber - 1;
+};
+
+export const getCurrentTotalRewards = (currentBlock: number) => {
+  const lastCycle = getCurrentCycle(currentBlock) - 1;
+  return TOTAL_REWARD_INITIAL_CYCLE * REWARD_DECREASE_RATE ** lastCycle;
 };

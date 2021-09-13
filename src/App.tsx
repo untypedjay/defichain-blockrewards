@@ -9,10 +9,12 @@ import {
   getAverageBlockTime,
   getReductionDate,
   getRemainingBlocks,
-  getCurrentCycle,
   getReductionBlock,
+  getCurrentTotalRewards,
+  round,
 } from "./utils";
 import { RewardDistribution } from "./components/RewardDistribution";
+import { CYCLE_BLOCK_LENGTH } from "./constants";
 
 const StyledApp = styled.div`
   color: var(--clr-text);
@@ -70,12 +72,12 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   const AVERAGE_BLOCK_TIME = getAverageBlockTime(currentBlock);
+  const TOTAL_REWARDS = getCurrentTotalRewards(currentBlock);
 
   useEffect(() => {
     const loadData = async () => {
       const stats = await getStats();
-      console.log(getCurrentCycle(stats.blockHeight));
-      setCurrentBlock(stats.blockHeight);
+      setCurrentBlock(stats.data.count.blocks);
       setIsLoading(false);
     };
 
@@ -95,7 +97,9 @@ export default function App() {
         <>
           <StyledHeading>DeFiChain Block Reward Countdown</StyledHeading>
           <p>
-            Block reward will decrease from {0} to {0} coins in approximately
+            Block reward will decrease from {round(TOTAL_REWARDS)} to{" "}
+            {round(getCurrentTotalRewards(currentBlock + CYCLE_BLOCK_LENGTH))}{" "}
+            DFI in approximately
           </p>
 
           <Countdown date={getReductionDate(currentBlock)} />
@@ -109,10 +113,10 @@ export default function App() {
                 {`${getRemainingBlocks(currentBlock)}`}
               </Card>
               <Card title="Average Block Time:" label="seconds">
-                {`${Math.round(AVERAGE_BLOCK_TIME * 100) / 100}`}
+                {`${round(AVERAGE_BLOCK_TIME)}`}
               </Card>
             </StyledHorizontalContainer>
-            <RewardDistribution />
+            <RewardDistribution totalRewards={TOTAL_REWARDS} />
           </StyledVerticalContainer>
         </>
       )}
