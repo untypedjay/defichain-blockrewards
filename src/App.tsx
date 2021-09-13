@@ -29,17 +29,24 @@ const StyledApp = styled.div`
   margin: 0 auto;
 
   @media (max-width: 830px) {
-    margin: 8em 0;
-    padding: 0 8%;
+    margin-top: 2em;
+    padding: 2em;
   }
 
-  @media (max-width: 600px) {
-    padding: 40px;
+  @media (max-width: 740px) {
+    margin-top: 4em;
   }
 
-  @media (max-width: 440px) {
-    padding: 20px;
-    margin: 8em 0;
+  @media (max-width: 700px) {
+    margin-top: 12em;
+  }
+
+  @media (max-width: 560px) {
+    margin-top: 16em;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 20em;
   }
 `;
 
@@ -50,8 +57,7 @@ const StyledVerticalContainer = styled.div`
   grid-gap: 2em;
 
   @media (max-width: 700px) {
-    grid-template-columns: 1fr;
-    padding-bottom: 3em;
+    display: none;
   }
 `;
 
@@ -65,6 +71,15 @@ const StyledHorizontalContainer = styled.div`
 const StyledHeading = styled.h1`
   margin: 0 0 1em 0;
   font-size: 2.3rem;
+`;
+
+const StyledMobileContainer = styled.div`
+  display: none;
+
+  @media (max-width: 700px) {
+    display: block;
+    width: 100%;
+  }
 `;
 
 export default function App() {
@@ -107,6 +122,19 @@ export default function App() {
           </p>
 
           <Countdown date={getReductionDate(currentBlock)} />
+
+          <StyledMobileContainer>
+            <Card
+              title="Blocks Remaining:"
+              label={`until ${getReductionBlock(currentBlock)}`}
+            >
+              {`${getRemainingBlocks(currentBlock)}`}
+            </Card>
+            <Card title="Average Block Time:" label="seconds">
+              {`${round(AVERAGE_BLOCK_TIME, 4)}`}
+            </Card>
+            <RewardDistribution totalRewards={TOTAL_REWARDS} />
+          </StyledMobileContainer>
 
           <StyledVerticalContainer>
             <StyledHorizontalContainer>

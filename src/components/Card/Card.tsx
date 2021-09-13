@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { cardStyles, StyledContent, StyledLabel } from "../../styles/CardStyle";
 
