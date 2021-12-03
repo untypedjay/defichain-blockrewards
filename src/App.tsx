@@ -102,7 +102,7 @@ export default function App() {
       loadData();
     }, AVERAGE_BLOCK_TIME * 1000);
     return () => clearInterval(interval);
-  }, [setCurrentBlock, AVERAGE_BLOCK_TIME]);
+  }, []);
 
   return (
     <StyledApp>
