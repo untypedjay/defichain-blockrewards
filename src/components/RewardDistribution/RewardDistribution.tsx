@@ -17,10 +17,9 @@ const StyledTable = styled.table`
   margin: auto;
 `;
 
-const StyledTableHeader = styled.thead`
-  th {
-    padding-right: 24px;
-  }
+const StyledTableHeaderCell = styled.th`
+  padding: 0;
+  text-align: left;
 `;
 
 const StyledTableBody = styled.tbody`
@@ -44,13 +43,13 @@ export default function RewardDistribution({ totalRewards }: Props) {
   return (
     <Card title="Current Reward Distribution:">
       <StyledTable>
-        <StyledTableHeader>
+        <thead>
           <tr>
-            <th>Area</th>
-            <th>DFI / Block</th>
-            <th>Proportion</th>
+            <StyledTableHeaderCell>Area</StyledTableHeaderCell>
+            <StyledTableHeaderCell>DFI / Block</StyledTableHeaderCell>
+            <StyledTableHeaderCell>Proportion</StyledTableHeaderCell>
           </tr>
-        </StyledTableHeader>
+        </thead>
         <StyledTableBody>
           <tr>
             <td>Mining Reward</td>

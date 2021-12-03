@@ -13,6 +13,11 @@ const StyledContainer = styled.div`
 
 const StyledCard = styled.div`
   ${cardStyles};
+
+  @media (max-width: 700px) {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 `;
 
 const StyledHeading = styled.h2`

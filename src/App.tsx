@@ -18,35 +18,24 @@ import { CYCLE_BLOCK_LENGTH, DFI_DECIMAL_PLACES } from "./constants";
 
 const StyledApp = styled.div`
   color: var(--clr-text);
-  height: 100%;
   top: 0;
+  height: 100%;
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   max-width: 800px;
-  margin: 0 auto;
-
-  @media (max-width: 830px) {
-    margin-top: 2em;
-    padding: 2em;
-  }
-
-  @media (max-width: 740px) {
-    margin-top: 4em;
-  }
+  margin: auto;
+  padding: 2em;
 
   @media (max-width: 700px) {
-    margin-top: 12em;
+    justify-content: right;
+    height: auto;
   }
 
-  @media (max-width: 560px) {
-    margin-top: 16em;
-  }
-
-  @media (max-width: 480px) {
-    margin-top: 20em;
+  @media (max-width: 500px) {
+    padding: 1em;
   }
 `;
 
