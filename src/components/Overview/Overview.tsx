@@ -7,6 +7,7 @@ import { getAverageBlockTime, getCurrentTotalRewards, getReductionBlock, getRedu
 import { Card } from "../Card";
 import { Countdown } from "../Countdown";
 import { Loader } from "../Loader";
+import { Navigation } from "../Navigation";
 import { RewardDistribution } from "../RewardDistribution";
 
 const StyledApp = styled.div`
@@ -132,6 +133,7 @@ export default function Overview() {
                 </StyledHorizontalContainer>
                 <RewardDistribution totalRewards={TOTAL_REWARDS} />
                 </StyledVerticalContainer>
+                <Navigation />
             </>
             )}
         </StyledApp>
