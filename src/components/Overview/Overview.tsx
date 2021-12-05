@@ -4,63 +4,39 @@ import useCurrentBlock from "../../hooks/useCurrentBlock";
 import { getAverageBlockTime, getCurrentTotalRewards, getReductionBlock, getReductionDate, getRemainingBlocks, round } from "../../utils";
 import { Card } from "../Card";
 import { Countdown } from "../Countdown";
-import { Loader } from "../Loader";
-import { Navigation } from "../Navigation";
+import { Layout } from "../Layout";
 import { RewardDistribution } from "../RewardDistribution";
 
-const StyledApp = styled.div`
-color: var(--clr-text);
-top: 0;
-height: 100%;
-text-align: center;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-max-width: 800px;
-margin: auto;
-padding: 2em;
-
-@media (max-width: 700px) {
-  justify-content: right;
-  height: auto;
-}
-
-@media (max-width: 500px) {
-  padding: 1em;
-}
-`;
-
 const StyledVerticalContainer = styled.div`
-display: grid;
-grid-template-columns: 1fr 2fr;
-width: 100%;
-grid-gap: 2em;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: 100%;
+    grid-gap: 2em;
 
-@media (max-width: 700px) {
-  display: none;
-}
+    @media (max-width: 700px) {
+        display: none;
+    }
 `;
 
 const StyledHorizontalContainer = styled.div`
-display: grid;
-grid-template-rows: 1fr 1fr;
-grid-gap: 2em;
-height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 2em;
+    height: 100%;
 `;
 
 const StyledHeading = styled.h1`
-margin: 0 0 1em 0;
-font-size: 2.3rem;
+    margin: 0 0 1em 0;
+    font-size: 2.3rem;
 `;
 
 const StyledMobileContainer = styled.div`
-display: none;
+    display: none;
 
-@media (max-width: 700px) {
-  display: block;
-  width: 100%;
-}
+    @media (max-width: 700px) {
+        display: block;
+        width: 100%;
+    }
 `;
 
 export default function Overview() {
@@ -70,10 +46,7 @@ export default function Overview() {
     const TOTAL_REWARDS = getCurrentTotalRewards(currentBlock);
     
     return (
-        <StyledApp>
-            {isLoading ? (
-            <Loader />
-            ) : (
+        <Layout isLoading={isLoading}>
             <>
                 <StyledHeading>DeFiChain Block Reward Countdown</StyledHeading>
                 <p>
@@ -115,9 +88,7 @@ export default function Overview() {
                 </StyledHorizontalContainer>
                 <RewardDistribution totalRewards={TOTAL_REWARDS} />
                 </StyledVerticalContainer>
-                <Navigation />
             </>
-            )}
-        </StyledApp>
+        </Layout>
     );
 }
