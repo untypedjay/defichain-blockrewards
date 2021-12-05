@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getStats } from "../../api/defichain";
 import { CYCLE_BLOCK_LENGTH, DFI_DECIMAL_PLACES } from "../../constants";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import useCurrentBlock from "../../hooks/useCurrentBlock";
 import { getAverageBlockTime, getCurrentTotalRewards, getReductionBlock, getReductionDate, getRemainingBlocks, round } from "../../utils";
 import { Card } from "../Card";
 import { Countdown } from "../Countdown";
@@ -66,26 +64,10 @@ display: none;
 `;
 
 export default function Overview() {
-    const [currentBlock, setCurrentBlock] = useLocalStorage("currentBlock", 0);
-    const [isLoading, setIsLoading] = useState(true);
+    const [currentBlock, isLoading] = useCurrentBlock();
   
     const AVERAGE_BLOCK_TIME = getAverageBlockTime(currentBlock);
     const TOTAL_REWARDS = getCurrentTotalRewards(currentBlock);
-  
-    useEffect(() => {
-      const loadData = async () => {
-        const stats = await getStats();
-        setCurrentBlock(stats.data.count.blocks);
-        setIsLoading(false);
-      };
-  
-      loadData();
-  
-      const interval = setInterval(() => {
-        loadData();
-      }, AVERAGE_BLOCK_TIME * 1000);
-      return () => clearInterval(interval);
-    }, []);
     
     return (
         <StyledApp>

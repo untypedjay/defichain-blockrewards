@@ -25,8 +25,7 @@ export const getAverageBlockTime = (block: number) => {
 };
 
 export const getReductionDate = (currentBlock: number) => {
-  const remainingTime =
-    getRemainingBlocks(currentBlock) * getAverageBlockTime(currentBlock);
+  const remainingTime = getRemainingBlocks(currentBlock) * getAverageBlockTime(currentBlock);
   const reductionDate = new Date();
   return new Date(reductionDate.getTime() + 1000 * remainingTime);
 };
